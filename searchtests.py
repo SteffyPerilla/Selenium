@@ -1,4 +1,5 @@
 import unittest
+from pyunitreport import HTMLTestRunner
 from selenium import webdriver
 
 class HomePageTests(unittest.TestCase):
@@ -37,4 +38,4 @@ class HomePageTests(unittest.TestCase):
         self.driver.quit()
 
 if __name__ == '__main__':
-    unittest.main(verbosity= 2) 
+    unittest.main(verbosity= 2,testRunner= HTMLTestRunner(output='Report', report_name='search_test_report')) 
