@@ -39,15 +39,6 @@ class AddRemoveElements(unittest.TestCase):
             print('There 0 are elements on screen')
 
     def tearDown(self):
-        self.driver.quit()
-
-if __name__ == '__main__':
-    unittest.main(verbosity=2,testRunner= HTMLTestRunner(output='Report', report_name='add_remove_elements_report'))
-                
-
-
-
-    def tearDown(self):
         self.driver.close()
 
 if __name__ == '__main__':
