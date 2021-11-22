@@ -1,6 +1,7 @@
 import csv, unittest
 from ddt import ddt, data, unpack 
-from selenium import webdriver
+from selenium import webdriver 
+from pyunitreport import HTMLTestRunner
 
 
 def get_data(file_name):
@@ -34,13 +35,17 @@ class SearchCsvDDT(unittest.TestCase):
         search_field.send_keys(search_value)
         search_field.submit()
 
-        products = driver.find_element_by_xpath('//h2[@class="product-name"]/a')
-        print(f'Found {len(products)} products')
+        products = driver.find_elements_by_xpath('//h2[@class="product-name"]/a')
 
-        for products in products:
-            print(products.text)
+        expected_count = int(expected_count)
 
-        self.assertEqual(expected_count,len(products))
+        if expected_count > 0:
+            self.assertEqual(expected_count, len(products))
+        else:
+            message = driver.find_element_by_class_name('note-msg')
+            self.assertEqual('You search returns no resulyts.', message)
+
+        print(f'Found {len(products)} products') 
 
     def tearDown(self):
         self.driver.quit()
